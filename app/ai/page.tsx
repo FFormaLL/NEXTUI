@@ -6,7 +6,7 @@ import { useState } from "react";
 import React from "react";
 import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
 
-const apiUrl = 'http://localhost:3000/api/llm';
+const apiUrl = 'http://achaves.dev/api/llm';
 
 type ChatMessage = {
   avatarUrl: string
@@ -80,7 +80,7 @@ export default function App() {
           <Input
             type="text"
             label="Prompt"
-            value={inputText[0]}
+            value={inputText}
             labelPlacement="outside-left"
             onChange={(e) => setInputText(e.target.value)}
           />
