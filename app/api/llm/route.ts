@@ -1,5 +1,5 @@
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -40,7 +40,7 @@ export async function POST(
     const text = result.response.text();
     console.log(text);
 
-    return Response.json({
+    return NextResponse.json({
         message: text
     })
 
