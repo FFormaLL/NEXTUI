@@ -95,8 +95,8 @@ export default function App() {
             </>
           ))}
         </div>
-        {chat.map(m => (
-          <div>
+        {chat.map((m,i) => (
+          <div key={i}>
             <div className="flex gap-5">
               <Avatar isBordered radius="full" size="md" />
               <div className="flex flex-col gap-1 items-start justify-center">
