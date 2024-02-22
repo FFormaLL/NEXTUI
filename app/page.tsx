@@ -5,6 +5,7 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import { Button, ButtonGroup } from "@nextui-org/button";
 
 export default function Home() {
 	return (
@@ -13,39 +14,33 @@ export default function Home() {
 				<h1 className={title()}>Make&nbsp;</h1>
 				<h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
 				<br />
-				<h1 className={title()}>
-					websites regardless of your design experience.
-				</h1>
-				<h2 className={subtitle({ class: "mt-4" })}>
-					Beautiful, fast and modern React UI library.
+				<h2 style={{ color: "violet" }} className={subtitle({ class: "mt-4" })}>
+					Click on something to get started!
 				</h2>
 			</div>
 
-			<div className="flex gap-3">
-				<Link
-					isExternal
-					href={siteConfig.links.docs}
-					className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}
-				>
-					Documentation
-				</Link>
-				<Link
-					isExternal
-					className={buttonStyles({ variant: "bordered", radius: "full" })}
-					href={siteConfig.links.github}
-				>
-					<GithubIcon size={20} />
-					GitHub
-				</Link>
+			<div className="flex flex-wrap gap-4 items-center">
+				{/* <Button color="primary" variant="solid">
+        Solid
+      </Button>
+      <Button color="primary" variant="faded">
+        Faded
+      </Button>  
+      <Button color="primary" variant="bordered">
+        Bordered
+      </Button>  
+      <Button color="primary" variant="flat">
+        Flat
+      </Button>   */}
+				<Link href="ai">
+					<Button color="primary" variant="ghost">
+						AI Chat
+					</Button> </Link>
+				{/* <Button color="primary" variant="shadow">
+        Shadow
+      </Button>   */}
 			</div>
 
-			<div className="mt-8">
-				<Snippet hideSymbol hideCopyButton variant="flat">
-					<span>
-						Get started by editing <Code color="primary">app/page.tsx</Code>
-					</span>
-				</Snippet>
-			</div>
 		</section>
 	);
 }
