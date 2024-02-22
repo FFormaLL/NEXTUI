@@ -6,7 +6,7 @@ import { useState } from "react";
 import React from "react";
 import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
 
-const apiUrl = 'https://achaves.dev/api/llm';
+const apiUrl = 'https://www.achaves.dev/api/llm';
 
 type ChatMessage = {
   avatarUrl: string
