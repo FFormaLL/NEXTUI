@@ -77,25 +77,18 @@ export default function App() {
       <div className="flex flex-col gap-2">
         <h3 className="text-default-500 text-small">Enter Yout Prompt To Ai</h3>
         <div className="flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4">
-          {placements.map((placement) => (
-            <>
-              <React.Fragment key={placement}>
-                <Input
-                  key={placement}
-                  type="text"
-                  label="Prompt"
-                  value={inputText[0]}
-                  labelPlacement={placement}
-                  onChange={(e) => setInputText([e.target.value])}
-                />
-                <Button color="primary" variant="ghost" onClick={submitPrompt}>
-                  Send
-                </Button>
-              </React.Fragment>
-            </>
-          ))}
+          <Input
+            type="text"
+            label="Prompt"
+            value={inputText[0]}
+            labelPlacement="outside-left"
+            onChange={(e) => setInputText(e.target.value)}
+          />
+          <Button color="primary" variant="ghost" onClick={submitPrompt}>
+            Send
+          </Button>
         </div>
-        {chat.map((m,i) => (
+        {chat.map((m, i) => (
           <div key={i}>
             <div className="flex gap-5">
               <Avatar isBordered radius="full" size="md" />
