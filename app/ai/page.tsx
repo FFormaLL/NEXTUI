@@ -34,7 +34,7 @@ export default function App() {
     setLoading(true)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/llm`, {
+      const response = await fetch(`${process.env.API_HOST}/api/llm`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
