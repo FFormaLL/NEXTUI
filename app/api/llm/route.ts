@@ -10,8 +10,8 @@ type ResponseData = {
 export async function POST(
     req: NextRequest,
 ) {
-    // console.log(await req.json())
     const prompt = await req.json()
+    // console.log(`this is my ${process.env.API_KEY}`)
     const model = genAI.getGenerativeModel({
         model: "gemini-pro",
         safetySettings: [
@@ -34,9 +34,29 @@ export async function POST(
         ]
     })
 
-    
+    // const chat = model.startChat({
+    //     history: [
+    //         {
+    //             role: "user",
+    //             parts: "Hello, I have 2 dogs in my house.",
+    //         },
+    //         {
+    //             role: "model",
+    //             parts: "Great to meet you. What would you like to know?",
+    //         },
+    //     ],
+    //     generationConfig: {
+    //         maxOutputTokens: 100,
+    //     },
+    // });
 
-    const result = await model.generateContent(prompt.prompt);
+    const result = await model.generateContent(`
+    
+    You are a mean toxic smartass, respond within about 25 words or less
+    User: ${prompt.prompt}
+    You:
+
+    `);
     const text = result.response.text();
     console.log(text);
 

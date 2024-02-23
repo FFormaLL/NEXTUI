@@ -5,8 +5,7 @@ import { Button, ButtonGroup } from "@nextui-org/button";
 import { useState } from "react";
 import React from "react";
 import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
-
-const apiUrl = 'https://www.achaves.dev/api/llm';
+import {Spinner} from "@nextui-org/spinner";
 
 type ChatMessage = {
   avatarUrl: string
@@ -18,9 +17,10 @@ type ChatMessage = {
 export default function App() {
   const [inputText, setInputText] = useState("")
   const [chat, setChat] = useState<ChatMessage[]>([])
+  const [loading, setLoading] = useState(false)
 
   const submitPrompt = async () => {
-
+    setInputText("")
     const newChat = [...chat]
 
     newChat.push({
@@ -28,11 +28,13 @@ export default function App() {
       name: "User",
       message: inputText,
       date: new Date()
-    })
+    }
+    )
     setChat(newChat)
+    setLoading(true)
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`http://localhost:3000/api/llm`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +43,7 @@ export default function App() {
       });
 
       const botReply = await response.json()
-
+      setLoading(false)
       const newChat2 = [...newChat]
 
       newChat2.push({
@@ -53,12 +55,13 @@ export default function App() {
       setChat(newChat2)
 
       if (response.ok) {
-        console.log('Prompt submitted successfully', inputText, await response.json());
+        console.log('Prompt submitted successfully', inputText, botReply);
       } else {
         console.error('Error submitting prompt');
       }
     } catch (error) {
-      console.error('Error submitting prompt', error);
+      console.error('Error submitting prompt', error)
+      setLoading(false);
     }
 
 
@@ -84,7 +87,7 @@ export default function App() {
             labelPlacement="outside-left"
             onChange={(e) => setInputText(e.target.value)}
           />
-          <Button color="primary" variant="ghost" onClick={submitPrompt}>
+          <Button color="primary" variant="ghost" onClick={submitPrompt} disabled={loading || !inputText}>
             Send
           </Button>
         </div>
@@ -100,7 +103,16 @@ export default function App() {
             </div>
           </div>
         ))}
-
+        {!loading ? null : (
+          <div className="flex gap-5">
+            <Avatar isBordered radius="full" size="md" />
+            <div className="flex flex-col gap-1 items-start justify-center">
+              <h4 className="text-small font-semibold leading-none text-default-600">Gemini</h4>
+              <h5 className="text-small tracking-tight text-default-400">{new Date().toLocaleTimeString()}</h5>
+              <p><Spinner size="sm" /></p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
