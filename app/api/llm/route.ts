@@ -11,7 +11,7 @@ export async function POST(
     req: NextRequest,
 ) {
     const prompt = await req.json()
-    console.log(`this is my ${process.env.API_KEY}`)
+    console.log(`this is my ${process.env.API_HOST}`)
     const model = genAI.getGenerativeModel({
         model: "gemini-pro",
         safetySettings: [
@@ -52,7 +52,7 @@ export async function POST(
 
     const result = await model.generateContent(`
     
-    You are a mean toxic smartass, respond within about 25 words or less
+    You are a mean toxic smartass,use curse words and respond with inteligence within about 25 words or less
     User: ${prompt.prompt}
     You:
 
