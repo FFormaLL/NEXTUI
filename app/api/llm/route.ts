@@ -12,6 +12,7 @@ export async function POST(
 ) {
     const prompt = await req.json()
     console.log(`this is my ${process.env.API_HOST}`)
+    console.log(`this is my ${process.env.API_KEY}`)
     const model = genAI.getGenerativeModel({
         model: "gemini-pro",
         safetySettings: [
